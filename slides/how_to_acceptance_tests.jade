@@ -1,0 +1,94 @@
+//- How do you acceptance test
+
+section("data-background"="/asset/no-idea-dog.jpg", "data-background-opacity"=0.4)
+  h1 How to 
+  h1 Acceptance Tests
+
+section
+  h1 The tools
+
+section
+  h1 UIAutomation
+
+section("data-background"="/asset/just-kidding.gif")
+  // h1 Just kidding
+
+section
+  h1 Apple UI Testing
+
+section
+  h2 Apple UI Testing
+  :markdown
+    ```swift
+    /**
+     * When I tap the "say hello" button, I see a greetings alert.
+     */
+    testSayHello() {
+      let app = XCUIApplication()
+      app.buttons["say hello"].tap()
+      app.alerts["Hello"].collectionViews.buttons["Dismiss"].tap()
+    }
+    ```
+
+section
+  h2 Apple UI Testing
+  :markdown
+    ```swift
+    /**
+     * When I tap the "show elementes" button, I see the list with 
+     * the elements of the periodic table.
+     */
+    testShowElements() {
+      let app = XCUIApplication()
+      app.buttons["show elements"].tap()
+
+      XCTAssertEqual(app.tables.count, 1)
+
+      let table = app.tables.elementAtIndex(0)
+      let periodicTableElementsCount: UInt = 118
+      XCTAssertEqual(table.cells.count, periodicTableElementsCount)
+    }
+    ```
+
+section
+  h1 KIF
+
+section
+  h2 KIF
+  :markdown
+    ```objc
+    describe(@"Main screen", ^{
+      context(@"when I tap the 'say hello' button", ^{
+        before(^{
+          [tester tapViewWithAccessibilityLabel:kSayHello];
+        });
+
+        it(@"I see a greetings alert", ^{
+          [tester waitForViewWithAccessibilityLabel:kHelloAlertTitle];
+          [tester waitForViewWithAccessibilityLabel:kHelloAlertMessage];
+          [tester waitForViewWithAccessibilityLabel:kHelloAlertButton];
+        });
+      });
+    });
+    ```
+
+section
+  h1 Calabash
+  h1 and
+  h1 Appium
+
+section("data-background"="/asset/retriver-mac.jpg", "data-background-opacity"=0.4)
+  h1 Were do I begin?
+
+section
+  h2 Add an acceptance test for the most important feature
+
+section
+  h2 Add an acceptance test for every new bug fix
+
+section("data-background"="/asset/bug.jpg", "data-background-opacity"=0.4)
+  h2
+    i "A bug is only a test that hasn't been written yet"
+  h3
+    i - I don't know who said this
+

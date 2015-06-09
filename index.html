@@ -1,17 +1,64 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>reveal.js - The HTML Presentation Framework</title><meta name="description" content="A framework for easily creating beautiful presentations using HTML"><meta name="author" content="Hakim El Hattab"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"><link rel="stylesheet" href="css/reveal.css"><link rel="stylesheet" href="css/theme/black.css" id="theme"><link rel="stylesheet" href="lib/css/zenburn.css"><script type="text/javascript">var link = document.createElement( 'link' );
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>reveal.js - The HTML Presentation Framework</title><meta name="description" content="A framework for easily creating beautiful presentations using HTML"><meta name="author" content="Hakim El Hattab"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"><link rel="stylesheet" href="css/reveal.css"><link rel="stylesheet" href="css/theme/night.css" id="theme"><link rel="stylesheet" href="lib/css/zenburn.css"><script type="text/javascript">var link = document.createElement( 'link' );
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 document.getElementsByTagName( 'head' )[0].appendChild( link );
-</script></head><body><div class="reveal"><div class="slides"><section><h1>Reveal.js</h1><h3>The HTML Presentation Framework</h3></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script type="text/javascript">// Full list of configuration options available at:
+</script></head><body><div class="reveal"><div class="slides"><section><h2><a href="http://twitter.com/mokagio">@mokagio</a></h2></section><section><h1>Talking myself into the value of acceptance testing</h1></section><section><h1>Before we begin...</h1></section><section><h1>Acceptance Test</h1><h1>!=</h1><h1>Unit Test</h1></section><section data-background="/asset/do-write-unit-tests.gif" data-background-opacity='0.4'><h1>DO WRITE </h1><h1>UNIT TESTS</h1></section><section data-background="/asset/gears.gif" data-background-opacity='0.4'><h1 id="this-talk-is-about-automated-acceptance-tests-">This talk is about <strong>(automated) acceptance tests</strong></h1>
+</section><section><h1>Acceptance Test</h1><h1>!=</h1><h1>Automated Test</h1></section><section><h2>Having the intern make sure that when logging in with Facebook the profile picture is the set correctly</h2><h2>🏃</h2><h2>is a test for an acceptance criteria</h2></section><section data-background="/asset/unit-test.gif" data-background-opacity='0.4'><h2>⌘U, Xcode Bots, Travis CI, Jenkins, etc, can be used to run unit tests automatically</h2></section><section data-background="/asset/kif.gif" data-background-opacity='0.4'><h2>Automated Acceptance Tests</h2><h2>=</h2><h2>Acceptance tests run automatically</h2></section><section><h1>Problems with acceptance testing</h1></section><section data-background="/asset/typewriter.jpg" data-background-opacity='0.4'><h1>Long to write</h1></section><section data-background="/asset/snail.jpg" data-background-opacity='0.4'><h1>Slow to run</h1></section><section data-background="/asset/money.jpg" data-background-opacity='0.4'><h1>Expensive to maintain</h1></section><section data-background="asset/qa2.gif" data-background-opacity='0.4'><h1>Still need QA</h1></section><section><h1><del>Apple doesn't care</del></h1></section><section data-background="/asset/apple-cares.jpg"><!-- Apple Care--></section><section data-background="/asset/fry-not-sure.jpg"></section><section><h1>Acceptance tests are useful when...</h1></section><section data-background="/asset/branches.jpg" data-background-opacity='0.4'><h1>"State-intense" & "many-branches" apps</h1></section><section data-background="/asset/spaghetti.jpg" data-background-opacity='0.4'><h1>Refactoring legacy spaghetti code</h1></section><!--section("data-background"="/asset/dilbert-agile.png", "data-background-repeat"="repeat")--><section data-background="/asset/dilbert-agile.png" data-background-opacity='0.4'><!--img(src="/asset/dilbert-agile.png")--><h2>The client with the JIRA board and the acceptance criterias</h2></section><section><h2>👍 </h2><h2><p><strong>big-medium</strong> teams with <strong>clear requirements</strong> and <strong>relaxed deadlines</strong></p>
+</h2></section><section><h2>👎  </h2><h2><p><strong>small/one man</strong> teams with <strong>green product</strong> and need for fast pace</p>
+</h2></section><section><h1><i>Just try it out and see how it goes</i></h1></section><section data-background="/asset/no-idea-dog.jpg" data-background-opacity='0.4'><h1>How to </h1><h1>Acceptance Tests</h1></section><section><h1>The tools</h1></section><section><h1>UIAutomation</h1></section><section data-background="/asset/just-kidding.gif"><!-- h1 Just kidding--></section><section><h1>Apple UI Testing</h1></section><section><h2>Apple UI Testing</h2><pre><code class="lang-swift">/**
+ * When I tap the &quot;say hello&quot; button, I see a greetings alert.
+ */
+testSayHello() {
+  let app = XCUIApplication()
+  app.buttons[&quot;say hello&quot;].tap()
+  app.alerts[&quot;Hello&quot;].collectionViews.buttons[&quot;Dismiss&quot;].tap()
+}
+</code></pre>
+</section><section><h2>Apple UI Testing</h2><pre><code class="lang-swift">/**
+ * When I tap the &quot;show elementes&quot; button, I see the list with 
+ * the elements of the periodic table.
+ */
+testShowElements() {
+  let app = XCUIApplication()
+  app.buttons[&quot;show elements&quot;].tap()
+
+  XCTAssertEqual(app.tables.count, 1)
+
+  let table = app.tables.elementAtIndex(0)
+  let periodicTableElementsCount: UInt = 118
+  XCTAssertEqual(table.cells.count, periodicTableElementsCount)
+}
+</code></pre>
+</section><section><h1>KIF</h1></section><section><h2>KIF</h2><pre><code class="lang-objc">describe(@&quot;Main screen&quot;, ^{
+  context(@&quot;when I tap the &#39;say hello&#39; button&quot;, ^{
+    before(^{
+      [tester tapViewWithAccessibilityLabel:kSayHello];
+    });
+
+    it(@&quot;I see a greetings alert&quot;, ^{
+      [tester waitForViewWithAccessibilityLabel:kHelloAlertTitle];
+      [tester waitForViewWithAccessibilityLabel:kHelloAlertMessage];
+      [tester waitForViewWithAccessibilityLabel:kHelloAlertButton];
+    });
+  });
+});
+</code></pre>
+</section><section><h1>Calabash</h1><h1>and</h1><h1>Appium</h1></section><section data-background="/asset/retriver-mac.jpg" data-background-opacity='0.4'><h1>Were do I begin?</h1></section><section><h2>Add an acceptance test for the most important feature</h2></section><section><h2>Add an acceptance test for every new bug fix</h2></section><section data-background="/asset/bug.jpg" data-background-opacity='0.4'><h2><i>"A bug is only a test that hasn't been written yet"</i></h2><h3><i>- I don't know who said this</i></h3></section><section><h2>Where to go from here</h2><ul>
+<li><a href="https://developer.apple.com/videos/wwdc/2015/?id=406">Xcode 7 UI testing - WWDC</a></li>
+<li><a href="https://github.com/kif-framework/KIF">KIF on GitHub</a></li>
+<li><a href="http://mokacoding.com/tag/Acceptance-Testing">mokacoding.com &gt; Acceptance Testing</a></li>
+<li><a href="http://www.pivotaltracker.com/community/tracker-blog/generative-testing">Generative Testing</a></li>
+</ul>
+</section><section><h1>Thanks</h1><h2>🎉</h2></section><section><h1>❓</h1><!-- h1 Questions--></section></div></div><script src="lib/js/head.min.js"></script><script src="js/reveal.js"></script><script type="text/javascript">// Full list of configuration options available at:
 // https://github.com/hakimel/reveal.js#configuration
 Reveal.initialize({
-  controls: true,
-  progress: true,
+  controls: false,
+  progress: false,
   history: true,
   center: true,
-
   transition: 'slide', // none/fade/slide/convex/concave/zoom
+  backgroundTransition: 'slide',
 
   // Optional reveal.js plugins
   dependencies: [
