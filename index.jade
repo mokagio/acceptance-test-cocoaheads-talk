@@ -54,3 +54,23 @@ html(lang="en")
           { src: 'plugin/notes/notes.js', async: true }
         ]
       });
+
+    // Set backgorund opacity
+    script(type="text/javascript").
+      var sections = document.getElementsByTagName("section")
+      var backgrounds = document.getElementsByClassName("slide-background")
+
+      for (i = 0; i < sections.length; i++) {
+        var section = sections[i]
+        var opacity = section.getAttribute("data-background-opacity")
+        if (!opacity) { continue; }
+
+        var background = backgrounds[i]
+        var backgroundStyle = background.getAttribute("style")
+
+        if (!backgroundStyle) { backgroundStyle = "" }
+
+        backgroundStyle = backgroundStyle + ";opacity: " + opacity + ";"
+        background.setAttribute("style", backgroundStyle)
+      }
+

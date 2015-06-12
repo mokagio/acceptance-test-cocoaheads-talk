@@ -22,4 +22,20 @@ Reveal.initialize({
     { src: 'plugin/zoom-js/zoom.js', async: true },
     { src: 'plugin/notes/notes.js', async: true }
   ]
-});</script></body></html>
+});
+</script><!-- Set backgorund opacity--><script type="text/javascript">var sections = document.getElementsByTagName("section")
+var backgrounds = document.getElementsByClassName("slide-background")
+
+for (i = 0; i < sections.length; i++) {
+  var section = sections[i]
+  var opacity = section.getAttribute("data-background-opacity")
+  if (!opacity) { continue; }
+
+  var background = backgrounds[i]
+  var backgroundStyle = background.getAttribute("style")
+
+  if (!backgroundStyle) { backgroundStyle = "" }
+
+  backgroundStyle = backgroundStyle + ";opacity: " + opacity + ";"
+  background.setAttribute("style", backgroundStyle)
+}</script></body></html>
