@@ -7,12 +7,42 @@ section
 
 include ./intro.jade
 
+section("data-background"="/asset/gears.gif", "data-background-opacity"=0.6)
+  :markdown
+    # This talk is about **(automated) acceptance tests**
+
+section
+  h1 Content
+  h2.fragment 😞
+  h2.fragment 😊
+  h2.fragment 👪
+  h2.fragment 🚀
+
+section
+  h1 😞
+
 include ./problems.jade
 
-section("data-background"="/asset/fry-not-sure.jpg")
-  //- So acceptance tests are useless
+//
+  section("data-background"="/asset/fry-not-sure.jpg")
+    //- So acceptance tests are useless
 
-include ./good_sides.jade
+section
+  h1 😊
+
+include ./when_useful.jade
+
+section
+  h1 👪
+
+include ./who_useful.jade
+
+section
+  h1
+    i Just try it out and see how it goes
+
+section
+  h1 🚀
 
 include ./how_to_acceptance_tests.jade
 
@@ -23,6 +53,12 @@ section
     * [KIF on GitHub](https://github.com/kif-framework/KIF)
     * [mokacoding.com > Acceptance Testing](http://mokacoding.com/tag/Acceptance-Testing)
     * [Generative Testing](http://www.pivotaltracker.com/community/tracker-blog/generative-testing)
+
+section
+  h1
+    i And remember...
+
+include do_write_unit_tests.jade
 
 section
   h1 Thanks
